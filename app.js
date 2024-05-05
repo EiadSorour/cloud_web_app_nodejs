@@ -82,10 +82,35 @@ const find_students_promise = Student.findAll()
         }  
     });  
 
-// Define routes (End points) 
+// Route for getting all students 
 app.get("/api/student" , async (req,res)=>{
     const allStudents = await Student.findAll({attributes: ["id", "name", "age", "cgpa"]});
     res.send(allStudents);
+});
+
+// Route for deletting all students
+app.delete("/api/student" , async (req,res)=>{
+    const savedData = await Student.findAll();
+    if(savedData.length === 0){
+        res.send("Students table already empty");
+    }else{
+        await Student.truncate();
+        res.send("Students data deleted successfully"); 
+    }
+});
+
+// Route for adding students data to database
+app.post("/api/student" , async (req,res)=>{
+    const savedData = await Student.findAll();
+    if(savedData.length != 0){
+        res.send("Students already saved in database");
+    }else{
+        students_data.forEach( async (student) => {
+            await Student.create(student)
+        });
+    
+        res.send("Students data saved successfully")
+    }
 });
 
 // Make app listen to requests through port 3000

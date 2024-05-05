@@ -10,6 +10,7 @@
 <body>
     <input type="submit" value="Add All Students" onclick="addAllStudents()">
     <input type="submit" value="Get All Students" onclick="getAllStudents()">
+    <input type="submit" value="Delete All Students" onclick="deleteAllStudents()">
 
     <script>
 
@@ -23,6 +24,12 @@
             var response = await fetch("http://localhost:3000/api/student" , {method: "GET"})
             const text = await response.text()
             console.log(JSON.parse(text));
+        }
+
+        async function deleteAllStudents() {
+            var response = await fetch("http://localhost:3000/api/student" , {method: "DELETE"})
+            const text = await response.text()
+            console.log(text);
         }
 
     </script>
