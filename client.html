@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Data</title>
+</head>
+
+<body>
+    <input type="submit" value="Add All Students" onclick="addAllStudents()">
+    <input type="submit" value="Get All Students" onclick="getAllStudents()">
+
+    <script>
+
+        async function addAllStudents(){
+            var response = await fetch("http://localhost:3000/api/student" , {method: "POST"})
+            const text = await response.text()
+            console.log(text);
+        }
+
+        async function getAllStudents() {
+            var response = await fetch("http://localhost:3000/api/student" , {method: "GET"})
+            const text = await response.text()
+            console.log(JSON.parse(text));
+        }
+
+    </script>
+</body>
+
+</html>
