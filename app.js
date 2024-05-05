@@ -1,9 +1,11 @@
 // Import required modules
 const express = require("express");
 const { Sequelize,DataTypes } = require('sequelize');
+const cors = require("cors");
 
 // Create new express app
 const app = express();
+app.use(cors());
 
 // Students data to be saved in the database
 const students_data = [
@@ -82,7 +84,7 @@ const find_students_promise = Student.findAll()
 
 // Define routes (End points) 
 app.get("/api/student" , async (req,res)=>{
-    const allStudents = await Student.findAll();
+    const allStudents = await Student.findAll({attributes: ["id", "name", "age", "cgpa"]});
     res.send(allStudents);
 });
 
